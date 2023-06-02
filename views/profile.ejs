@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+    <h2>Task</h2>
+    <a href="/user/logout"><button>Logout</button></a>
+    </div>
+    <div>
+        <form action="/user/task/add" method="post">
+            <div>
+        <input name="work" type="text" required placeholder="Enter A Task">
+            </div>
+            <div>
+                <textarea name="desc" required placeholder="Description" type="textarea"></textarea>
+            </div>
+        <button type="submit">Add</button>
+        </form>
+    </div>
+    <div>
+        <% task.forEach(val=>{%>
+            <div>
+            <div><%= val.title %></div>
+            <div><%= val.desc %></div>
+            <div>
+               <form action="/user/task/delete/<%=val._id %>?_method=DELETE" method="post">
+                <button type="submit">Delete</button>
+               </form>   
+            </div>
+            </div>
+
+       <% }) %>
+    </div>
+
+</body>
+</html>
