@@ -82,6 +82,8 @@ function genCookie(user,res){
     res.cookie("val",token,{
         httpOnly:true,
         expires:new Date(Date.now()+10*60*100000),
+        sameSite:process.env.NODE_ENV==="development"?"lax":"none",
+        secure:process.env.NODE_ENV==="development"?false:true,
     })
 }
 //Update Task
@@ -150,6 +152,8 @@ route.get('/logout',Authentication,(req,res)=>{
     res.cookie("val","",{
         httpOnly:true,
         expires:new Date(Date.now()),
+        sameSite:process.env.NODE_ENV==="development"?"lax":"none",
+        secure:process.env.NODE_ENV==="development"?false:true,
     })
     res.redirect("/");
 })
