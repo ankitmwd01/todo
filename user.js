@@ -31,7 +31,7 @@ route.get("/profile",Authentication,async(req,res)=>{
         res.redirect('/');
         return;
     }
-    let decode = jwt.verify(token,"Ankit",{
+    let decode = jwt.verify(token,process.env.SECRET_KEY,{
      complete:true,
     });
     let nwID=decode.payload._id
@@ -48,7 +48,7 @@ route.get("/profile",Authentication,async(req,res)=>{
 route.post("/task/add",Authentication,async (req,res)=>{
       try{
         let token = req.cookies.val
-        let decode = jwt.verify(token,"Ankit",{
+        let decode = jwt.verify(token,process.env.SECRET_KEY,{
          complete:true,
         });
         let nwID=decode.payload._id;
@@ -78,7 +78,7 @@ route.delete("/task/delete/:id",Authentication,async(req,res)=>{
 })
 
 function genCookie(user,res){
-    let token =jwt.sign({_id:user._id},"Ankit")
+    let token =jwt.sign({_id:user._id},process.env.SECRET_KEY)
     res.cookie("val",token,{
         httpOnly:true,
         expires:new Date(Date.now()+10*60*100000),

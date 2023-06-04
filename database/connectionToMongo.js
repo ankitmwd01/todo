@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
- const MongoConnection=()=>mongoose.connect("mongodb://127.0.0.1:27017/todo").then(()=>{
+ const MongoConnection=()=>mongoose.connect(process.env.MONGO_URI,{
+    dbName:process.env.DB_NAME,
+ }).then(()=>{
     console.log("connected to Mongo");
 })
 .catch((e)=>{
