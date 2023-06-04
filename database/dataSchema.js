@@ -3,6 +3,10 @@ const task= new mongoose.Schema({
     title:String,
     desc:String,
     ID:String,
+    done:{
+        type:Boolean,
+        default:true,
+    },
 })
 const Task= new mongoose.model("Task",task);
 const user=new mongoose.Schema({
